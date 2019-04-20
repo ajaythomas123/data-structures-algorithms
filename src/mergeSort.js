@@ -2,14 +2,14 @@ import { curry } from "ramda";
 
 /**
  * Merges two small arrays in to a larger sorted array
- * @param { Function } splitArrayCb 
- * @param { Function } compareArrayCb 
- * @param { Function } leftArrayCb 
- * @param { Function } rightArrayCb 
- * @param { Number[] } arr 
- * @param { Number } p 
- * @param { Number } q 
- * @param { Number } r 
+ * @param { Function } splitArrayCb
+ * @param { Function } compareArrayCb
+ * @param { Function } leftArrayCb
+ * @param { Function } rightArrayCb
+ * @param { Number[] } arr
+ * @param { Number } p
+ * @param { Number } q
+ * @param { Number } r
  */
 const merge = curry(
   (splitArrayCb,
@@ -46,15 +46,15 @@ const merge = curry(
 
 /**
  * Sorts an array of numbers using merge sort
- * @param { Function } splitArrayCb 
- * @param { Function } compareArrayCb 
- * @param { Function } leftArrayCb 
- * @param { Function } rightArrayCb 
- * @param { Number[] } arr 
- * @param { Number } p 
- * @param { Number } r 
+ * @param { Function } splitArrayCb
+ * @param { Function } compareArrayCb
+ * @param { Function } leftArrayCb
+ * @param { Function } rightArrayCb
+ * @param { Number[] } arr
+ * @param { Number } p
+ * @param { Number } r
  */
-const mergeSort = curry(
+export const mergeSort = curry(
   (splitArrayCb,
     compareArrayCb,
     leftArrayCb,
@@ -75,5 +75,3 @@ const mergeSort = curry(
     return A;
   }
 );
-
-module.exports = { mergeSort };

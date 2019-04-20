@@ -11,19 +11,19 @@ export const insertionSort = curry(
   (
     outerLoopCb,
     innerLoopCb,
-    arr,
-    comparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0)
+    comparator,
+    arr
   ) => {
+    comparator = comparator || ((a, b) => (a > b ? 1 : a < b ? -1 : 0));
     for (let j = 1; j < arr.length; j++) {
       const key = arr[j];
       for (let i = j - 1; i >= 0 && comparator(arr[i], key) > 0; i--) {
         arr[i + 1] = arr[i];
         arr[i] = key;
-        innerLoopCb([...arr]);
+        innerLoopCb && innerLoopCb([...arr]);
       }
-      outerLoopCb([...arr]);
+      outerLoopCb && outerLoopCb([...arr]);
     }
     return arr;
   }
 );
-

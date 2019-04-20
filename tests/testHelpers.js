@@ -6,7 +6,7 @@ import { compose, curry, map } from 'ramda';
  * @param { Number } max Maximum value
  */
 export const getRandomIntGenerator = (min, max) => () => {
-    min = Math.ceil(min),
+  min = Math.ceil(min),
     max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -49,3 +49,19 @@ export const generateArrayOfRandomIntObjects = compose(
   map(generateRandomIntObject),
   generateArray
 );
+
+/**
+ * Returns true if an array is sorted in ascending order
+ * @param { any[] } array
+ */
+export const isSortedAsc = array => array.reduce((acc, curr, index, self) => index === self.length - 1
+  ? acc
+  : acc && (curr <= self[index + 1]), true);
+
+/**
+ * Returns true if an array is sorted in descending order
+ * @param { any[] } array
+ */
+export const isSortedDesc = array => array.reduce((acc, curr, index, self) => index === self.length - 1
+  ? acc
+  : acc && (curr >= self[index + 1]), true);

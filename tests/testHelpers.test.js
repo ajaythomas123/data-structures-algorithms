@@ -1,6 +1,6 @@
 import {
   getRandomIntGenerator, getRandomInt, generateObject, generateArray, generateArrayOfIntegers,
-  generateArrayOfRandomIntObjects, generateRandomIntObject
+  generateArrayOfRandomIntObjects, generateRandomIntObject, isSortedAsc, isSortedDesc
 } from './testHelpers';
 
 const isBetweenBounds = (min, max, x) => x >= min && x <= max;
@@ -33,7 +33,7 @@ describe('Test Helpers', () => {
       value = obj && obj.hasOwnProperty('value') && obj.value,
       check = typeof obj === 'object'
         && Number.isSafeInteger(value);
-      expect(check).toBe(true);
+    expect(check).toBe(true);
   });
 
   it('generateArray generates an array of a given length filled with undefined', () => {
@@ -57,23 +57,43 @@ describe('Test Helpers', () => {
       check = isArray
         && array.length === length
         && allSafeIntegers;
-      expect(check).toBe(true);
+    expect(check).toBe(true);
   });
 
   it('generateArrayOfRandomIntObjects generates an array of objects where each object contains a random safe integer',
-  () => {
-    const length = 10,
-    array = generateArrayOfRandomIntObjects(length),
-    isArray = Array.isArray(array),
-    isValidObject = obj => obj
-      && typeof obj === 'object'
-      && obj.hasOwnProperty('value')
-      && Number.isSafeInteger(obj.value),
-    allValidObjects = array.reduce((acc, curr) => acc && isValidObject(curr), true),
-    check = isArray
-      && array.length === length
-      && allValidObjects;
-    expect(check).toBe(true);
+    () => {
+      const length = 10,
+        array = generateArrayOfRandomIntObjects(length),
+        isArray = Array.isArray(array),
+        isValidObject = obj => obj
+          && typeof obj === 'object'
+          && obj.hasOwnProperty('value')
+          && Number.isSafeInteger(obj.value),
+        allValidObjects = array.reduce((acc, curr) => acc && isValidObject(curr), true),
+        check = isArray
+          && array.length === length
+          && allValidObjects;
+      expect(check).toBe(true);
+    });
+
+  it('isSortedAsc returns true for an array sorted in ascending order', () => {
+    const array = [1, 2, 3, 4, 5];
+    expect(isSortedAsc(array)).toBe(true);
+  });
+
+  it('isSortedAsc returns false for an unsorted array', () => {
+    const array = [8, 6, 2, 8, 3, 4];
+    expect(isSortedAsc(array)).toBe(false);
+  });
+
+  it('isSortedDesc returns true for an array sorted in descending order', () => {
+    const array = [5, 4, 3, 2, 1];
+    expect(isSortedDesc(array)).toBe(true);
+  });
+
+  it('isSortedDesc returns false for an unsorted array', () => {
+    const array = [8, 6, 2, 8, 3];
+    expect(isSortedDesc(array)).toBe(false);
   });
 });
 
