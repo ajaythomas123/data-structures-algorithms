@@ -1,6 +1,6 @@
 import {
   getRandomIntGenerator, getRandomInt, generateObject, generateArray, generateArrayOfIntegers,
-  generateArrayOfRandomIntObjects
+  generateArrayOfRandomIntObjects, generateRandomIntObject
 } from './testHelpers';
 
 const isBetweenBounds = (min, max, x) => x >= min && x <= max;
@@ -26,6 +26,14 @@ describe('Test Helpers', () => {
       object = generateObject(value),
       check = object.hasOwnProperty('value') && object.value === value;
     expect(check).toBe(true);
+  });
+
+  it('generateRandomIntObject returns an object containing a random safe integer in the value field', () => {
+    const obj = generateRandomIntObject(),
+      value = obj && obj.hasOwnProperty('value') && obj.value,
+      check = typeof obj === 'object'
+        && Number.isSafeInteger(value);
+      expect(check).toBe(true);
   });
 
   it('generateArray generates an array of a given length filled with undefined', () => {

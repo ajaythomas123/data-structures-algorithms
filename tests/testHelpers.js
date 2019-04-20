@@ -23,6 +23,11 @@ export const getRandomInt = getRandomIntGenerator(-Number.MAX_SAFE_INTEGER, Numb
 export const generateObject = (value) => ({ value });
 
 /**
+ * A function that returns an object containing a random safe integer in the value field
+ */
+export const generateRandomIntObject = compose(generateObject, getRandomInt);
+
+/**
  * Generates an array of a given length filled with undefined
  * @param { Number } length Length of the array
  */
@@ -31,16 +36,16 @@ export const generateArray = length => Array(length).fill(undefined);
 /**
  * Generates an array of a given length filled with random safe integers
  */
-export const generateArrayOfIntegers = length => map(
-  getRandomInt,
-  generateArray(length)
+export const generateArrayOfIntegers = compose(
+  map(getRandomInt),
+  generateArray
 );
 
 /**
  * Generates an array of objects of a given length where each object contains a random safe integer in the 'value'
  * field
  */
-export const generateArrayOfRandomIntObjects = length => map(
-  compose(generateObject, getRandomInt),
-  generateArray(length)
+export const generateArrayOfRandomIntObjects = compose(
+  map(generateRandomIntObject),
+  generateArray
 );
