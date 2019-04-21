@@ -54,14 +54,18 @@ export const generateArrayOfRandomIntObjects = compose(
  * Returns true if an array is sorted in ascending order
  * @param { any[] } array
  */
-export const isSortedAsc = array => array.reduce((acc, curr, index, self) => index === self.length - 1
-  ? acc
-  : acc && (curr <= self[index + 1]), true);
+export const isSortedAsc = array => array.reduce((acc, curr, index, self) => typeof curr === 'object'
+  ? false
+  : index === self.length - 1
+    ? acc
+    : acc && (curr <= self[index + 1]), true);
 
 /**
  * Returns true if an array is sorted in descending order
  * @param { any[] } array
  */
-export const isSortedDesc = array => array.reduce((acc, curr, index, self) => index === self.length - 1
-  ? acc
-  : acc && (curr >= self[index + 1]), true);
+export const isSortedDesc = array => array.reduce((acc, curr, index, self) => typeof curr === 'object'
+  ? false
+  : index === self.length - 1
+    ? acc
+    : acc && (curr >= self[index + 1]), true);

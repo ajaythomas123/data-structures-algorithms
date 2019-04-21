@@ -60,16 +60,16 @@ export const mergeSort = curry(
     leftArrayCb,
     rightArrayCb,
     comparator,
-    arr,
     p,
-    r
+    r,
+    arr
   ) => {
     const q = Math.floor((p + r) / 2);
     let A = [...arr];
     comparator = comparator || ((a, b) => (a > b ? 1 : a < b ? -1 : 0));
     if (p < r) {
-      A = mergeSort(splitArrayCb, compareArrayCb, leftArrayCb, rightArrayCb, comparator, A, p, q);
-      A = mergeSort(splitArrayCb, compareArrayCb, leftArrayCb, rightArrayCb, comparator, A, q + 1, r);
+      A = mergeSort(splitArrayCb, compareArrayCb, leftArrayCb, rightArrayCb, comparator, p, q, A);
+      A = mergeSort(splitArrayCb, compareArrayCb, leftArrayCb, rightArrayCb, comparator, q + 1, r, A);
       A = merge(splitArrayCb, compareArrayCb, leftArrayCb, rightArrayCb, comparator, A, p, q, r);
     }
     return A;
